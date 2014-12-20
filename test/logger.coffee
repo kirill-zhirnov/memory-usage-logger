@@ -1,10 +1,12 @@
 assert = require('chai').assert
 sinon = require 'sinon'
 fs = require 'fs'
+path = require 'path'
 MemoryLogger = require '../src/logger'
 
 describe 'MemoryLogger', ->
 	fsMock = null
+	pathMock = null
 	logger = null
 	mockFolderName = "2010-06-01 10:05:05:6"
 
@@ -21,9 +23,11 @@ describe 'MemoryLogger', ->
 			}
 
 		fsMock = sinon.mock fs
+		pathMock = sinon.mock path
 
 	afterEach ->
 		fsMock.restore()
+		pathMock.restore()
 
 	it 'setLogDir should validate path and set it', ->
 		fsMock.expects('existsSync').once().returns(true).withExactArgs(__dirname)
@@ -32,7 +36,6 @@ describe 'MemoryLogger', ->
 			isDirectory : ->
 				return true
 		}).withExactArgs(__dirname)
-
 
 		logger.setLogDir __dirname
 
@@ -76,6 +79,7 @@ describe 'MemoryLogger', ->
 			pipe : ->
 		})
 		fsMock.expects('createWriteStream').exactly(4)
+		pathMock.expects('resolve').exactly(4)
 
 		logger.setLogDir('some/path')
 
@@ -83,6 +87,7 @@ describe 'MemoryLogger', ->
 		assert.equal logger.getLogFile(), "some/path/#{mockFolderName}/data.csv"
 
 		fsMock.verify()
+		pathMock.verify()
 
 	it 'appendToLogFile should append string to logFile', ->
 		logger.getLogFile = ->
@@ -109,7 +114,6 @@ describe 'MemoryLogger', ->
 			pipe : ->
 		})
 		fsMock.expects('createWriteStream').exactly(4)
-
 
 		logger.setLogDir 'some/path'
 		logger.setMaxLogSize 50000

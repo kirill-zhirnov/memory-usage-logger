@@ -1,6 +1,4 @@
-MemoryLogger = require '../src/logger'
-
-logger = new MemoryLogger
+logger = require '../index'
 logger.run(1000, "#{__dirname}/logs")
 
 class Request

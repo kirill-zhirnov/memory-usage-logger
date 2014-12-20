@@ -1,4 +1,5 @@
 fs = require 'fs'
+path = require 'path'
 
 class MemoryLogger
 	constructor : () ->
@@ -66,8 +67,11 @@ class MemoryLogger
 
 		fs.mkdirSync folder
 
-		fs.createReadStream('../src/index.html').pipe(fs.createWriteStream("#{folder}/index.html"))
-		fs.createReadStream('../lib/client.js').pipe(fs.createWriteStream("#{folder}/client.js"))
+		indexHtmlPath = path.resolve __dirname, '../src/index.html'
+		clientJsPath = path.resolve __dirname, '../lib/client.js'
+
+		fs.createReadStream(indexHtmlPath).pipe(fs.createWriteStream("#{folder}/index.html"))
+		fs.createReadStream(clientJsPath).pipe(fs.createWriteStream("#{folder}/client.js"))
 
 		return "#{folder}/data.csv"
 
