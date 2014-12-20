@@ -1,6 +1,6 @@
 {
   "name": "memory-usage-logger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Memory usage logger and chart builder.",
   "keywords": ["Memory", "logger", "chart", "memoryUsage", "heapUsed", "heapTotal", "monitor"],
   "main": "index.js",

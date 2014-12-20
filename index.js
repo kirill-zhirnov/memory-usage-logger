@@ -11,7 +11,7 @@ var exportMethods = [
 for (var i = 0; i < exportMethods.length; i++) {
 	(function(method) {
 		module.exports[method] = function() {
-			return logger[method].apply(pathAlias, arguments);
+			return logger[method].apply(logger, arguments);
 		};
 	}) (exportMethods[i]);
 }
