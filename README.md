@@ -5,7 +5,7 @@ This module logs memory usage in CSV file and builds a chart.
 
 The example of a result is:
 
-![Chart example](/examples/screen.jpg?raw=true)
+![Chart example](/examples/screen.png?raw=true)
 
 ## How to use it?
 ``` node
