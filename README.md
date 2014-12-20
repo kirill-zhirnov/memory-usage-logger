@@ -25,6 +25,7 @@ logger.stop();
 logger.run(delay, logDir)
 ```
 **delay** - delay for **setInterval**
+
 **logDir** - **Directory** to log data.
 
 ### stop
